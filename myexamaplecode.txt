@@ -1,0 +1,109 @@
+#include<stdio.h>
+#include<json-c/json.h>
+#include<string.h>
+
+int counter =0;
+
+int main(int argc, char **argv) {
+struct json_object *med_obj, *medi_array, *medi_array_obj, *medi_array_obj_name;
+int arraylen, i;
+char name[10] = {0};
+//char buffer[1024];
+static const char filename[] = "example3.json";
+typedef struct Devices dev;
+
+ struct Devices{
+                char   Deviceid[30];
+                char   Devicetype[20];
+                char Appkey[20];
+                };
+ struct Devices buffer[20];                
+while(1)
+{
+   
+
+med_obj = json_object_from_file(filename);
+medi_array = json_object_object_get(med_obj, "Devices");
+
+// medi_array is an array of objects
+arraylen = json_object_array_length(medi_array);
+
+for (i = 0; i < arraylen; i++) {
+  // get the i-th object in medi_array
+  medi_array_obj = json_object_array_get_idx(medi_array, i);
+  // get the name attribute in the i-th object
+  medi_array_obj_name = json_object_object_get(medi_array_obj, "Deviceid");
+  // print out the name attribute
+  printf("Deviceid=%s\n", json_object_get_string(medi_array_obj_name));
+  medi_array_obj_name = json_object_object_get(medi_array_obj, "Devicetype");
+  // print out the name attribute
+  printf("Devicetype=%s\n", json_object_get_string(medi_array_obj_name));
+  medi_array_obj_name = json_object_object_get(medi_array_obj, "Appkey");
+  // print out the name attribute
+  printf("Appkey=%s\n", json_object_get_string(medi_array_obj_name));
+  strcpy(&buffer[0].Deviceid[0],json_object_get_string(medi_array_obj_name));
+  printf("%s",buffer[0].Deviceid);
+  strcpy(&buffer[0].Devicetype[0],json_object_get_string(medi_array_obj_name));
+  printf("%s",buffer[0].Devicetype);
+  strcpy(&buffer[0].Appkey[0],json_object_get_string(medi_array_obj_name));
+  printf("%s",buffer[0].Appkey);
+  dev Devices[10];
+  char userChoice;
+  dev Device[10];
+  
+  while(userChoice!='Q')
+  {
+  printf("Please enter a command:\n");
+  printf("'A':Add a device\n");
+  printf("'D':Delete a device\n");
+  printf("'Q':Quit\n");
+  
+  scanf("%s",&userChoice);
+  
+ if(userChoice == 'A')
+   AddDevices(Devices);
+ if(userChoice == 'D')
+   DeletDevices(Devices);
+   
+ if(userChoice == 'Q')
+ {
+   printf("Devices entry will now Quit.");
+   return 0;
+   }
+ }
+  
+  AddDevices();
+  }
+  
+  
+   
+
+  
+  sleep(2); 
+ } 
+ }
+ 
+ void AddDevices(dev Device[]){
+ counter++;
+ printf("Enter Deviceid:");
+ scanf("%s",Device[counter-1].Deviceid);
+ 
+ printf("Enter Devicetype:");
+ scanf("%s",Device[counter-1].Devicetype);
+  
+ printf("Enter Appkey:");
+ scanf("%s",Device[counter-1].Appkey);  
+ 
+ printf("\n%s added to Devices\n",Device[counter-1].Deviceid);
+ } 
+ 
+ 
+ 
+            
+ 
+ 
+ 
+
+
+
+   
